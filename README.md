@@ -3,11 +3,11 @@
 # Users
 
 ##Get 
-###/users/{id}
+/users/{id}
 
 ##Post
-###/users
-###body
+/users
+#body
 {
 	"firstName": "Some Value",
 	"lastName": "Some Value",
