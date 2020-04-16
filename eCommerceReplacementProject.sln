@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCommerceReplacementProject.DataRepository", "eCommerceReplacementProject.DataRepository\eCommerceReplacementProject.DataRepository.csproj", "{8335F719-FC41-4D09-9464-8B0AF8CB0B21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerceReplacementProject.DataRepository", "eCommerceReplacementProject.DataRepository\eCommerceReplacementProject.DataRepository.csproj", "{8335F719-FC41-4D09-9464-8B0AF8CB0B21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCommerceReplacementProject.Users.Data", "eCommerceReplacementProject.Users.Data\eCommerceReplacementProject.Users.Data.csproj", "{A68FC7F3-4BEF-4E95-A3E8-79291ABAA97C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerceReplacementProject.Users.Data", "eCommerceReplacementProject.Users.Data\eCommerceReplacementProject.Users.Data.csproj", "{A68FC7F3-4BEF-4E95-A3E8-79291ABAA97C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCommerceReplacementProject.CommonClasses", "eCommerceReplacementProject.CommonClasses\eCommerceReplacementProject.CommonClasses.csproj", "{E6B6D81C-D241-4A4A-BA38-744548FA45DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerceReplacementProject.CommonClasses", "eCommerceReplacementProject.CommonClasses\eCommerceReplacementProject.CommonClasses.csproj", "{E6B6D81C-D241-4A4A-BA38-744548FA45DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCommerceReplacementProject.Users.Server", "eCommerceReplacementProject.Users.Server\eCommerceReplacementProject.Users.Server.csproj", "{1CE7A775-6F29-4A27-9737-D874F2EA95D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerceReplacementProject.Users.Server", "eCommerceReplacementProject.Users.Server\eCommerceReplacementProject.Users.Server.csproj", "{1CE7A775-6F29-4A27-9737-D874F2EA95D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCommerceReplacementProject.Web", "eCommerceReplacementProject.Web\eCommerceReplacementProject.Web.csproj", "{3EB771B5-6C5C-46E9-860E-3DD62BCB037F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerceReplacementProject.Web", "eCommerceReplacementProject.Web\eCommerceReplacementProject.Web.csproj", "{3EB771B5-6C5C-46E9-860E-3DD62BCB037F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerceReplacementProject.Client", "eCommerceReplacementProject.Client\eCommerceReplacementProject.Client.csproj", "{238A5A23-53D3-417F-A690-53030442E284}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerceReplacementProject.Client.IntegrationTests", "eCommerceReplacementProject.Client.UnitTests\eCommerceReplacementProject.Client.IntegrationTests.csproj", "{0A4BC395-3664-4ED9-9F25-379B784E995C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{3EB771B5-6C5C-46E9-860E-3DD62BCB037F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EB771B5-6C5C-46E9-860E-3DD62BCB037F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EB771B5-6C5C-46E9-860E-3DD62BCB037F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{238A5A23-53D3-417F-A690-53030442E284}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{238A5A23-53D3-417F-A690-53030442E284}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{238A5A23-53D3-417F-A690-53030442E284}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{238A5A23-53D3-417F-A690-53030442E284}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A4BC395-3664-4ED9-9F25-379B784E995C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A4BC395-3664-4ED9-9F25-379B784E995C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A4BC395-3664-4ED9-9F25-379B784E995C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A4BC395-3664-4ED9-9F25-379B784E995C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
