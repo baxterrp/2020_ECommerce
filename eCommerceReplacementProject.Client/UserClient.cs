@@ -1,9 +1,5 @@
 ﻿using eCommerceReplacementProject.CommonClasses;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace eCommerceReplacementProject.Client
@@ -11,17 +7,14 @@ namespace eCommerceReplacementProject.Client
     /// <summary>
     /// 
     /// </summary>
-    public class UserClient : IUserClient
+    public class UserClient : BaseHttpRequestClient<UserResource>, IUserClient
     {
-        private readonly ClientConfiguration _clientConfiguration;
-
         /// <summary>
         /// 
         /// </summary>
         /// <param name="clientConfiguration"></param>
-        public UserClient(ClientConfiguration clientConfiguration)
+        public UserClient(ClientConfiguration clientConfiguration) : base(clientConfiguration)
         {
-            _clientConfiguration = clientConfiguration ?? throw new ArgumentNullException(nameof(clientConfiguration));
         }
 
         /// <summary>
@@ -31,15 +24,11 @@ namespace eCommerceReplacementProject.Client
         /// <returns></returns>
         public async Task<UserResource> FindUserById(string id)
         {
-            using (var client = new HttpClient())
-            {
-                var requestAddress = $"{_clientConfiguration.BaseAddress}/user/{id}";
-                var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestAddress);
+            var requestUri = $"/user/{id}";
+            var httpRequest = BuildGetRequest(requestUri);
+            var httpResponse = await SendRequest(httpRequest);
 
-                var httpResponse = await client.SendAsync(httpRequest);
-
-                return await ReadHttpResponse(httpResponse);
-            }
+            return await ReadHttpResponse(httpResponse);
         }
 
         /// <summary>
@@ -49,24 +38,11 @@ namespace eCommerceReplacementProject.Client
         /// <returns></returns>
         public async Task<UserResource> RegisterNewUser(UserResource userResource)
         {
-            using (var client = new HttpClient())
-            {
-                var requestAddress = $"{_clientConfiguration.BaseAddress}/user";
-                var request = new HttpRequestMessage(HttpMethod.Post, requestAddress);
-                request.Content = new StringContent(JsonConvert.SerializeObject(userResource), UTF8Encoding.UTF8, _clientConfiguration.MediaType);
+            var requestUri = "/user";
+            var httpRequest = BuildPostRequest(requestUri, userResource);
+            var httpResponse = await SendRequest(httpRequest);
 
-                var httpResponse = await client.SendAsync(request);
-
-                return await ReadHttpResponse(httpResponse);
-            }
-        }
-
-        private async Task<UserResource> ReadHttpResponse(HttpResponseMessage httpResponse)
-        {
-            var stringifiedResult = await httpResponse.Content.ReadAsStringAsync();
-            var deserializedResult = JsonConvert.DeserializeObject<UserResource>(stringifiedResult);
-
-            return deserializedResult;
+            return await ReadHttpResponse(httpResponse);
         }
     }
 }

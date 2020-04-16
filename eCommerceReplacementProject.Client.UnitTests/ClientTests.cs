@@ -44,6 +44,8 @@ namespace eCommerceReplacementProject.Client.IntegrationTests
             result.Password.Should().NotBe(testUser.Password);
         }
 
+        //TODO: Create a cleanup method to remove data from db
+
         private UserResource GetTestUser() => 
             new UserResource
             {
