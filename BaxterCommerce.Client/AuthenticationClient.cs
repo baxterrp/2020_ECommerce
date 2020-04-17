@@ -26,10 +26,23 @@ namespace BaxterCommerce.Client
 
             if (httpResponse.IsSuccessStatusCode)
             {
-                return await ReadHttpResponse(httpResponse);
+                var successResponse = await ReadHttpResponse(httpResponse);
+
+                var message = successResponse.Success ? "Login Successful" : "Invalid Credentials";
+
+                successResponse.Messages.Add(message);
+
+                return successResponse;
             }
 
-            throw new InvalidOperationException("Attempt made to login with invalid credentials");
+            var errorResponse = new LoginResponse
+            {
+                Success = false,
+            };
+
+            errorResponse.Messages.Add("An error occured making the request");
+
+            return errorResponse;
         }
     }
 }

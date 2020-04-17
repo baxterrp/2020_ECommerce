@@ -55,12 +55,7 @@ namespace BaxterCommerce.Web.Controllers
         {
             var response = await _userService.AttemptLogin(loginRequest);
 
-            if (response.Success)
-            {
-                return Ok(response);
-            }
-
-            return Unauthorized();
+            return Ok(response);
         }
     }
 }
