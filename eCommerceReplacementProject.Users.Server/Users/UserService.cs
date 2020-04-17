@@ -1,6 +1,7 @@
 ﻿using eCommerceReplacementProject.CommonClasses.Users;
 using eCommerceReplacementProject.Data.Users;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace eCommerceReplacementProject.Web.Services.Users
@@ -22,6 +23,25 @@ namespace eCommerceReplacementProject.Web.Services.Users
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
             _passwordHashing = passwordHashing ?? throw new ArgumentNullException(nameof(passwordHashing));
+        }
+
+        public async Task<LoginResponse> AttemptLogin(LoginRequest loginRequest)
+        {
+            var userFromEmail = (await _userRepository.Find(new UserSearchParameters { Email = loginRequest.Email })).Single();
+            var isValidPassword = _passwordHashing.VerifyPassword(loginRequest.Password, userFromEmail.Password);
+            var loginResponse = new LoginResponse();
+
+            if (isValidPassword)
+            {
+                loginResponse.Success = true;
+                loginResponse.User = userFromEmail;
+            }
+            else
+            {
+                loginResponse.Success = false;
+            }
+
+            return loginResponse;
         }
 
         /// <summary>

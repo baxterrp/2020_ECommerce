@@ -3,11 +3,16 @@
     /// <summary>
     /// 
     /// </summary>
-    public class UserSearchParameters : BaseSearchParameters
+    public class LoginRequest
     {
         /// <summary>
         /// 
         /// </summary>
         public string Email { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Password { get; set; }
     }
 }

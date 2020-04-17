@@ -16,9 +16,11 @@ namespace eCommerceReplacementProject.Web.Services.Users
             return hash;
         }
 
-        public bool VerifyPassword(string actualPassword)
+        public bool VerifyPassword(string actualPassword, string hashedPassword)
         {
-            throw new NotImplementedException();
+            var isValid = BCryptHelper.CheckPassword(actualPassword, hashedPassword);
+
+            return isValid;
         }
     }
 }

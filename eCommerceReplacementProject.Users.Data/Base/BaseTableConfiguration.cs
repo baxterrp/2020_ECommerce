@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eCommerceReplacementProject.CommonClasses;
+using System;
 
 namespace eCommerceReplacementProject.Data.Base
 {
@@ -31,11 +32,34 @@ namespace eCommerceReplacementProject.Data.Base
         /// <summary>
         /// 
         /// </summary>
+        public abstract string FindById { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public abstract string Insert { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public abstract string Update { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public virtual string BuildWhereClause(string sql, BaseSearchParameters parameters)
+        {
+            sql += " WHERE ";
+
+            if (!(string.IsNullOrWhiteSpace(parameters.Id)))
+            {
+                sql += "[Id] = @Id";
+            }
+
+            return sql;
+        }
     }
 }

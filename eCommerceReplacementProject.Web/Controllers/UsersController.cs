@@ -44,5 +44,23 @@ namespace eCommerceReplacementProject.Web.Controllers
         {
             return Ok(await _userService.CreateNewUser(userResource));
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loginRequest"></param>
+        /// <returns></returns>
+        [HttpPost("/user/login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+        {
+            var response = await _userService.AttemptLogin(loginRequest);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+
+            return Unauthorized();
+        }
     }
 }

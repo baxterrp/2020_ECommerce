@@ -28,5 +28,12 @@ namespace eCommerceReplacementProject.Web.Services
         /// <param name="userResource"></param>
         /// <returns></returns>
         Task UpdateUser(UserResource userResource);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loginRequest"></param>
+        /// <returns></returns>
+        Task<LoginResponse> AttemptLogin(LoginRequest loginRequest);
     }
 }

@@ -29,13 +29,13 @@ namespace eCommerceReplacementProject.Data.Base
         /// </summary>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<TResource>> Find(object parameters)
+        public async Task<IEnumerable<TResource>> Find(BaseSearchParameters parameters)
         {
             using (var connection = new SqlConnection(_connectionConfiguration.ConnectionString))
             {
                 try
                 {
-                    var results = await connection.QueryAsync<TResource>(_tableConfiguration.Find, parameters);
+                    var results = await connection.QueryAsync<TResource>(_tableConfiguration.BuildWhereClause(_tableConfiguration.Find, parameters), parameters);
 
                     return results;
                 }

@@ -16,7 +16,8 @@
         /// 
         /// </summary>
         /// <param name="actualPassword"></param>
+        /// <param name="hashedPassword"></param>
         /// <returns></returns>
-        bool VerifyPassword(string actualPassword);
+        bool VerifyPassword(string actualPassword, string hashedPassword);
     }
 }

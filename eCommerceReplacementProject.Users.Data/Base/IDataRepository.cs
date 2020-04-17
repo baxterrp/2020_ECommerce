@@ -23,13 +23,13 @@ namespace eCommerceReplacementProject.Data.Base
         /// <param name="resource"></param>
         /// <returns></returns>
         Task Update(TResource resource);
-
+        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        Task<IEnumerable<TResource>> Find(object parameters);
+        Task<IEnumerable<TResource>> Find(BaseSearchParameters parameters);
 
         /// <summary>
         /// 
