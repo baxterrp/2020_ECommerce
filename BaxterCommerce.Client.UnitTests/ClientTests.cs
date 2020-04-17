@@ -8,12 +8,12 @@ namespace BaxterCommerce.Client.IntegrationTests
     [TestClass]
     public class ClientTests
     {
-        private IUserClient userClient;
+        private IUserRegistrationClient userClient;
 
         [TestMethod]
         public async Task GetAsyncFindsUser()
         {
-            userClient = new UserClient(new ClientConfiguration { BaseAddress = "https://localhost:5001", MediaType = "application/json" });
+            userClient = new UserRegistrationClient(new ClientConfiguration { BaseAddress = "https://localhost:5001", MediaType = "application/json" });
             var testUser = await userClient.RegisterNewUser(GetTestUser());
             var result = await userClient.FindUserById(testUser.Id);
 
@@ -29,7 +29,7 @@ namespace BaxterCommerce.Client.IntegrationTests
         [TestMethod]
         public async Task CreateUser()
         {
-            userClient = new UserClient(new ClientConfiguration { BaseAddress = "https://localhost:5001", MediaType = "application/json" });
+            userClient = new UserRegistrationClient(new ClientConfiguration { BaseAddress = "https://localhost:5001", MediaType = "application/json" });
             var testUser = GetTestUser();
             var result = await userClient.RegisterNewUser(testUser);
 

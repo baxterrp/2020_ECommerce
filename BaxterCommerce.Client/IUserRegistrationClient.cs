@@ -6,7 +6,7 @@ namespace BaxterCommerce.Client
     /// <summary>
     /// 
     /// </summary>
-    public interface IUserClient
+    public interface IUserRegistrationClient
     {
         /// <summary>
         /// 

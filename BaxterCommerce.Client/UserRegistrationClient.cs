@@ -1,6 +1,4 @@
-﻿using BaxterCommerce.CommonClasses;
-using BaxterCommerce.CommonClasses.Users;
-using System.Net.Http;
+﻿using BaxterCommerce.CommonClasses.Users;
 using System.Threading.Tasks;
 
 namespace BaxterCommerce.Client
@@ -8,13 +6,13 @@ namespace BaxterCommerce.Client
     /// <summary>
     /// 
     /// </summary>
-    public class UserClient : BaseHttpRequestClient<UserResource>, IUserClient
+    public class UserRegistrationClient : BaseHttpRequestClient<UserResource, UserResource>, IUserRegistrationClient
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="clientConfiguration"></param>
-        public UserClient(ClientConfiguration clientConfiguration) : base(clientConfiguration)
+        public UserRegistrationClient(ClientConfiguration clientConfiguration) : base(clientConfiguration)
         {
         }
 

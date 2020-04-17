@@ -10,7 +10,7 @@ namespace BaxterCommerce.Client
     /// <summary>
     /// 
     /// </summary>
-    public abstract class BaseHttpRequestClient<TResource> where TResource : BaseResource
+    public abstract class BaseHttpRequestClient<TResource, TResponseObject>
     {
         private readonly ClientConfiguration _clientConfiguration;
 
@@ -66,10 +66,10 @@ namespace BaxterCommerce.Client
         /// </summary>
         /// <param name="httpResponse"></param>
         /// <returns></returns>
-        protected async Task<TResource> ReadHttpResponse(HttpResponseMessage httpResponse)
+        protected async Task<TResponseObject> ReadHttpResponse(HttpResponseMessage httpResponse)
         {
             var stringifiedResult = await httpResponse.Content.ReadAsStringAsync();
-            var deserializedResult = JsonConvert.DeserializeObject<TResource>(stringifiedResult);
+            var deserializedResult = JsonConvert.DeserializeObject<TResponseObject>(stringifiedResult);
 
             return deserializedResult;
         }
