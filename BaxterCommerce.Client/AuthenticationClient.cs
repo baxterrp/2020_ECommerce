@@ -7,7 +7,7 @@ namespace BaxterCommerce.Client
     /// <summary>
     /// 
     /// </summary>
-    public class AuthenticationClient : BaseHttpRequestClient<LoginRequest, UserResource>, IAuthenticationClient
+    public class AuthenticationClient : BaseHttpRequestClient<LoginRequest, LoginResponse>, IAuthenticationClient
     {
         public AuthenticationClient(ClientConfiguration clientConfiguration) : base(clientConfiguration)
         {
@@ -18,7 +18,7 @@ namespace BaxterCommerce.Client
         /// </summary>
         /// <param name="loginRequest"></param>
         /// <returns></returns>
-        public async Task<UserResource> Login(LoginRequest loginRequest)
+        public async Task<LoginResponse> Login(LoginRequest loginRequest)
         {
             var requestUri = $"/user/login";
             var httpRequest = BuildPostRequest(requestUri, loginRequest);

@@ -12,6 +12,6 @@ namespace BaxterCommerce.Client
         /// </summary>
         /// <param name="loginRequest"></param>
         /// <returns></returns>
-        Task<UserResource> Login(LoginRequest loginRequest);
+        Task<LoginResponse> Login(LoginRequest loginRequest);
     }
 }
