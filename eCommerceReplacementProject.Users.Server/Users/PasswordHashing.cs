@@ -1,7 +1,7 @@
 ﻿using DevOne.Security.Cryptography.BCrypt;
 using System;
 
-namespace eCommerceReplacementProject.Users.Server
+namespace eCommerceReplacementProject.Web.Services.Users
 {
     /// <summary>
     /// 

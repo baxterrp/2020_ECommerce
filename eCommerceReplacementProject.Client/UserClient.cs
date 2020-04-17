@@ -1,4 +1,5 @@
 ﻿using eCommerceReplacementProject.CommonClasses;
+using eCommerceReplacementProject.CommonClasses.Users;
 using System.Net.Http;
 using System.Threading.Tasks;
 

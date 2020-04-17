@@ -1,4 +1,4 @@
-﻿using eCommerceReplacementProject.CommonClasses;
+﻿using eCommerceReplacementProject.CommonClasses.Users;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;

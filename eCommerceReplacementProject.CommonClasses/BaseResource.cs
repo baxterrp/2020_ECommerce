@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eCommerceReplacementProject.DataRepository
+namespace eCommerceReplacementProject.CommonClasses
 {
     /// <summary>
     /// 

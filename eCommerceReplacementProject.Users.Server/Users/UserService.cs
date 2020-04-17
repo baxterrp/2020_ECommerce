@@ -1,8 +1,9 @@
-﻿using eCommerceReplacementProject.CommonClasses;
+﻿using eCommerceReplacementProject.CommonClasses.Users;
+using eCommerceReplacementProject.Data.Users;
 using System;
 using System.Threading.Tasks;
 
-namespace eCommerceReplacementProject.Users.Server
+namespace eCommerceReplacementProject.Web.Services.Users
 {
     /// <summary>
     /// 

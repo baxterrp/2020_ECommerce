@@ -1,4 +1,4 @@
-﻿namespace eCommerceReplacementProject.CommonClasses
+﻿namespace eCommerceReplacementProject.CommonClasses.Users
 {
     /// <summary>
     /// 

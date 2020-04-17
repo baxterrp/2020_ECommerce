@@ -1,7 +1,4 @@
-﻿using eCommerceReplacementProject.CommonClasses;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using eCommerceReplacementProject.CommonClasses.Users;
 using System.Threading.Tasks;
 
 namespace eCommerceReplacementProject.Client

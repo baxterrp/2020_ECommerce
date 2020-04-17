@@ -1,4 +1,4 @@
-﻿namespace eCommerceReplacementProject.Users.Server
+﻿namespace eCommerceReplacementProject.Web.Services
 {
     /// <summary>
     /// 

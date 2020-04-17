@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace eCommerceReplacementProject.DataRepository
+namespace eCommerceReplacementProject.Data.Base
 {
     //TODO: handle exceptions better
     /// <summary>

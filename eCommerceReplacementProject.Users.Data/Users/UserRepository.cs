@@ -1,10 +1,9 @@
-﻿using eCommerceReplacementProject.CommonClasses;
-using eCommerceReplacementProject.DataRepository;
-using eCommerceReplacementProject.Users.Server;
+﻿using eCommerceReplacementProject.CommonClasses.Users;
+using eCommerceReplacementProject.Data.Base;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace eCommerceReplacementProject.Users.Data
+namespace eCommerceReplacementProject.Data.Users
 {
     /// <summary>
     /// 

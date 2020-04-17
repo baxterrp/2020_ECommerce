@@ -1,6 +1,6 @@
-﻿using eCommerceReplacementProject.DataRepository;
+﻿using eCommerceReplacementProject.Data.Base;
 
-namespace eCommerceReplacementProject.Users.Data
+namespace eCommerceReplacementProject.Data.Users
 {
     /// <summary>
     /// 

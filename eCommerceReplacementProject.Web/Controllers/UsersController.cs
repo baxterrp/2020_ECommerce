@@ -1,5 +1,5 @@
-﻿using eCommerceReplacementProject.CommonClasses;
-using eCommerceReplacementProject.Users.Server;
+﻿using eCommerceReplacementProject.CommonClasses.Users;
+using eCommerceReplacementProject.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;

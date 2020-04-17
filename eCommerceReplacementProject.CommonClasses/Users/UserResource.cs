@@ -1,6 +1,4 @@
-﻿using eCommerceReplacementProject.DataRepository;
-
-namespace eCommerceReplacementProject.CommonClasses
+﻿namespace eCommerceReplacementProject.CommonClasses.Users
 {
     /// <summary>
     /// 

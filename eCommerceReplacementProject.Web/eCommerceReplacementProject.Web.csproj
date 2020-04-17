@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\eCommerceReplacementProject.Users.Data\eCommerceReplacementProject.Users.Data.csproj" />
-    <ProjectReference Include="..\eCommerceReplacementProject.Users.Server\eCommerceReplacementProject.Users.Server.csproj" />
+    <ProjectReference Include="..\eCommerceReplacementProject.Users.Data\eCommerceReplacementProject.Data.csproj" />
+    <ProjectReference Include="..\eCommerceReplacementProject.Users.Server\eCommerceReplacementProject.Web.Services.csproj" />
   </ItemGroup>
 
 </Project>

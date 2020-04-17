@@ -2,39 +2,40 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace eCommerceReplacementProject.Users.Server
+namespace eCommerceReplacementProject.Data.Base
 {
     /// <summary>
     /// 
     /// </summary>
-    public interface IUserRepository
+    /// <typeparam name="TResource"></typeparam>
+    public interface IDataRepository<TResource> where TResource : BaseResource
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="resource"></param>
         /// <returns></returns>
-        Task Insert(UserResource resource);
+        Task Insert(TResource resource);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="resource"></param>
         /// <returns></returns>
-        Task Update(UserResource resource);
+        Task Update(TResource resource);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        Task<IEnumerable<UserResource>> Find(UserSearchParameters parameters);
+        Task<IEnumerable<TResource>> Find(object parameters);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<UserResource> FindById(string id);
+        Task<TResource> FindById(string id);
     }
 }

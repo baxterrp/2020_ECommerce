@@ -1,41 +1,40 @@
-﻿using eCommerceReplacementProject.CommonClasses;
+﻿using eCommerceReplacementProject.CommonClasses.Users;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace eCommerceReplacementProject.DataRepository
+namespace eCommerceReplacementProject.Data.Users
 {
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="TResource"></typeparam>
-    public interface IDataRepository<TResource> where TResource : BaseResource
+    public interface IUserRepository
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="resource"></param>
         /// <returns></returns>
-        Task Insert(TResource resource);
+        Task Insert(UserResource resource);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="resource"></param>
         /// <returns></returns>
-        Task Update(TResource resource);
+        Task Update(UserResource resource);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        Task<IEnumerable<TResource>> Find(object parameters);
+        Task<IEnumerable<UserResource>> Find(UserSearchParameters parameters);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<TResource> FindById(string id);
+        Task<UserResource> FindById(string id);
     }
 }

@@ -1,6 +1,7 @@
-﻿using eCommerceReplacementProject.DataRepository;
-using eCommerceReplacementProject.Users.Data;
-using eCommerceReplacementProject.Users.Server;
+﻿using eCommerceReplacementProject.Data.Base;
+using eCommerceReplacementProject.Data.Users;
+using eCommerceReplacementProject.Web.Services;
+using eCommerceReplacementProject.Web.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
