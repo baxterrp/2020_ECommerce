@@ -1,16 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.35" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+    <PackageReference Include="BCrypt" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\eCommerceReplacementProject.CommonClasses\eCommerceReplacementProject.CommonClasses.csproj" />
+    <ProjectReference Include="..\eCommerceReplacementProject.Data\eCommerceReplacementProject.Data.csproj" />
   </ItemGroup>
 
 </Project>
