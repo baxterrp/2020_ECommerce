@@ -16,8 +16,12 @@ namespace BaxterCommerce.Data.Users
         public UserTableConfiguration() : base("Users")
         {
             Find = $"SELECT * FROM {Name}";
+            
             FindById = $"SELECT * FROM {Name} WHERE [Id] = @Id";
-            Insert = $"INSERT INTO {Name} (Id, FirstName, lastName, Email, Password, CreatedAt, UpdatedAt, IsAdmin) VALUES (@Id, @FirstName, @LastName, @Email, @Password, @CreatedAt, @UpdatedAt, @IsAdmin)";
+            
+            Insert = $"INSERT INTO {Name} (Id, FirstName, lastName, Email, Password, CreatedAt, UpdatedAt, IsAdmin, Address, City, State, ZipCode, PhoneNumber)" +
+                " VALUES (@Id, @FirstName, @LastName, @Email, @Password, @CreatedAt, @UpdatedAt, @IsAdmin, @Address, @City, @State, @ZipCode, @PhoneNumber)";
+
             Update = $"UPDATE {Name} SET [FirstName] = @FirstName, [LastName] = @LastName, [Email] = @Email, [Password] = @Password WHERE [Id] = @Id";
         }
 
