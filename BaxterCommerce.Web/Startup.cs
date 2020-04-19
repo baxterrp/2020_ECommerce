@@ -1,7 +1,9 @@
 ﻿using BaxterCommerce.Data.Base;
+using BaxterCommerce.Data.Migrations;
 using BaxterCommerce.Data.Users;
 using BaxterCommerce.Web.Services;
 using BaxterCommerce.Web.Services.Users;
+using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +28,12 @@ namespace BaxterCommerce.Web
             Configuration.GetSection("ConnectionConfiguration").Bind(config);
             services.AddSingleton(config);
 
+            services.AddFluentMigratorCore()
+                .ConfigureRunner(rb => rb
+                    .AddSqlServer()
+                    .WithGlobalConnectionString(config.ConnectionString)
+                    .ScanIn(typeof(Version041920201252).Assembly).For.Migrations());
+
             services.AddSingleton<BaseTableConfiguration>(sp => new UserTableConfiguration());
             services.AddSingleton<IPasswordHashing, PasswordHashing>();
             services.AddSingleton<IUserService, UserService>();
@@ -35,7 +43,7 @@ namespace BaxterCommerce.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IMigrationRunner runner)
         {
             if (env.IsDevelopment())
             {
@@ -57,6 +65,8 @@ namespace BaxterCommerce.Web
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
+
+            runner.MigrateUp();
         }
     }
 }
