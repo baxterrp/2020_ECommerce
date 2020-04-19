@@ -1,19 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Required classes for communicating with web server</Description>
-    <Version>1.0.5</Version>
-    <Authors>Robert Baxter</Authors>
-    <PackageDescription>Common classes for client use</PackageDescription>
-    <RepositoryUrl>https://github.com/baxterrp/2020_ECommerce_Nuget_Packages.git</RepositoryUrl>
+    <Version>1.0.6</Version>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="NewFolder\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
-    <None Remove="NewFolder\**" />
-  </ItemGroup>
-
 </Project>
