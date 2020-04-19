@@ -4,7 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Client package for consuming services</Description>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
+    <Authors>Robert Baxter</Authors>
+    <PackageDescription>Client package for consuming services</PackageDescription>
+    <RepositoryUrl>https://github.com/baxterrp/2020_ECommerce_Nuget_Packages.git</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
