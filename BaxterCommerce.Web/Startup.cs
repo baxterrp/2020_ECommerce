@@ -22,15 +22,14 @@ namespace BaxterCommerce.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var _connectionConfiguration = new ConnectionConfiguration
-            {
-                ConnectionString = "Data Source = Silver; Initial Catalog = eComm; Integrated Security = True"
-            };
+            var config = new ConnectionConfiguration();
+            Configuration.GetSection("ConnectionConfiguration").Bind(config);
+            services.AddSingleton(config);
 
+            services.AddSingleton<BaseTableConfiguration>(sp => new UserTableConfiguration());
             services.AddSingleton<IPasswordHashing, PasswordHashing>();
             services.AddSingleton<IUserService, UserService>();
-            services.AddSingleton<IUserRepository, UserRepository>(
-                sp => new UserRepository(_connectionConfiguration, new UserTableConfiguration()));
+            services.AddSingleton<IUserRepository, UserRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
