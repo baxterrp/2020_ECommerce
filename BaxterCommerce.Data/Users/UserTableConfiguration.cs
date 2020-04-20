@@ -2,17 +2,15 @@
 using BaxterCommerce.CommonClasses.Users;
 using BaxterCommerce.Data.Base;
 using System;
+using System.Text;
 
 namespace BaxterCommerce.Data.Users
 {
     /// <summary>
-    /// 
+    /// Table configuration data on "Users" table
     /// </summary>
     public class UserTableConfiguration : BaseTableConfiguration
     {
-        /// <summary>
-        /// 
-        /// </summary>
         public UserTableConfiguration() : base("Users")
         {
             Find = $"SELECT * FROM {Name}";
@@ -26,31 +24,30 @@ namespace BaxterCommerce.Data.Users
         }
 
         /// <summary>
-        /// 
+        /// override of <see cref="BaseTableConfiguration.Find"/>
         /// </summary>
         public override string Find { get; set; }
 
         /// <summary>
-        /// 
+        /// override of <see cref="BaseTableConfiguration.Insert"/>
         /// </summary>
         public override string Insert { get; set; }
 
         /// <summary>
-        /// 
+        /// override of <see cref="BaseTableConfiguration.Update"/>
         /// </summary>
         public override string Update { get; set; }
 
         /// <summary>
-        /// 
+        /// override of <see cref="BaseTableConfiguration.FindById"/>
         /// </summary>
         public override string FindById { get; set; }
 
         /// <summary>
-        /// 
+        /// override of <see cref="BaseTableConfiguration.BuildWhereClause(string, BaseSearchParameters)"/>
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+        /// <remarks>calls base method to get WHERE and optionally add <see cref="BaseResource.Id"/> as parameter
+        /// also adds optional <see cref="UserResource.Email"/></remarks>
         public override string BuildWhereClause(string sql, BaseSearchParameters parameters)
         {
             sql = base.BuildWhereClause(sql, parameters);
@@ -58,6 +55,7 @@ namespace BaxterCommerce.Data.Users
             if (!(parameters is UserSearchParameters userSearchParameters)) throw new ArgumentException("Invalid parameter search type");
 
             int paramCount = 0;
+            StringBuilder sb = new StringBuilder(sql);
 
             if (!(string.IsNullOrWhiteSpace(userSearchParameters.Id)))
             {
@@ -66,14 +64,12 @@ namespace BaxterCommerce.Data.Users
 
             if (!(string.IsNullOrWhiteSpace(userSearchParameters.Email)))
             {
-                if (paramCount > 0) sql += " AND ";
-               
-                paramCount++;
+                if (paramCount > 0) sb.Append(" AND ");
 
-                sql += "[Email] = @Email";
+                sb.Append("[Email] = @Email");
             }
 
-            return sql;
+            return sb.ToString();
         }
     }
 }

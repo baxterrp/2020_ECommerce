@@ -2,6 +2,9 @@
 
 namespace BaxterCommerce.Data.Migrations
 {
+    /// <summary>
+    /// Construct Users table
+    /// </summary>
     [Migration(041920201252)]
     public class Version041920201252 : Migration
     {

@@ -25,10 +25,8 @@ namespace BaxterCommerce.Data.Base
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IDataRepository{TResource}.Find(BaseSearchParameters)"/>
         /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
         public async Task<IEnumerable<TResource>> Find(BaseSearchParameters parameters)
         {
             using (var connection = new SqlConnection(_connectionConfiguration.ConnectionString))
@@ -47,10 +45,8 @@ namespace BaxterCommerce.Data.Base
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IDataRepository{TResource}.FindById(string)"/>
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public async Task<TResource> FindById(string id)
         {
             using (var connection = new SqlConnection(_connectionConfiguration.ConnectionString))
@@ -69,10 +65,8 @@ namespace BaxterCommerce.Data.Base
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IDataRepository{TResource}.Insert(TResource)"/>
         /// </summary>
-        /// <param name="resource"></param>
-        /// <returns></returns>
         public virtual async Task Insert(TResource resource)
         {
             using (var connection = new SqlConnection(_connectionConfiguration.ConnectionString))
@@ -89,10 +83,8 @@ namespace BaxterCommerce.Data.Base
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IDataRepository{TResource}.Update(TResource)"/>
         /// </summary>
-        /// <param name="resource"></param>
-        /// <returns></returns>
         public virtual async Task Update(TResource resource)
         {
             using (var connection = new SqlConnection(_connectionConfiguration.ConnectionString))

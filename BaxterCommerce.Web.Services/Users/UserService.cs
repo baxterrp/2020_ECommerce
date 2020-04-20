@@ -25,6 +25,11 @@ namespace BaxterCommerce.Web.Services.Users
             _passwordHashing = passwordHashing ?? throw new ArgumentNullException(nameof(passwordHashing));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loginRequest"></param>
+        /// <returns></returns>
         public async Task<LoginResponse> AttemptLogin(LoginRequest loginRequest)
         {
             var userFromEmail = (await _userRepository.Find(new UserSearchParameters { Email = loginRequest.Email })).Single();
