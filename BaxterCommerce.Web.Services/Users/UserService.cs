@@ -7,18 +7,13 @@ using System.Threading.Tasks;
 namespace BaxterCommerce.Web.Services.Users
 {
     /// <summary>
-    /// 
+    /// Service for handling <see cref="UserResource"/>
     /// </summary>
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHashing _passwordHashing;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="userRepository"></param>
-        /// <param name="passwordHashing"></param>
+        
         public UserService(IUserRepository userRepository, IPasswordHashing passwordHashing)
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
@@ -26,10 +21,8 @@ namespace BaxterCommerce.Web.Services.Users
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IUserService.AttemptLogin(LoginRequest)"/> 
         /// </summary>
-        /// <param name="loginRequest"></param>
-        /// <returns></returns>
         public async Task<LoginResponse> AttemptLogin(LoginRequest loginRequest)
         {
             var userFromEmail = (await _userRepository.Find(new UserSearchParameters { Email = loginRequest.Email })).Single();
@@ -50,10 +43,8 @@ namespace BaxterCommerce.Web.Services.Users
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IUserService.CreateNewUser(UserResource)"/>
         /// </summary>
-        /// <param name="userResource"></param>
-        /// <returns></returns>
         public async Task<UserResource> CreateNewUser(UserResource userResource)
         {
             userResource.Id = Guid.NewGuid().ToString();
@@ -70,10 +61,8 @@ namespace BaxterCommerce.Web.Services.Users
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IUserService.GetUserById(string)"/>
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public async Task<UserResource> GetUserById(string id)
         {
             var result = await _userRepository.FindById(id);
@@ -82,10 +71,8 @@ namespace BaxterCommerce.Web.Services.Users
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IUserService.UpdateUser(UserResource)"/>
         /// </summary>
-        /// <param name="userResource"></param>
-        /// <returns></returns>
         public Task UpdateUser(UserResource userResource)
         {
             throw new System.NotImplementedException();
