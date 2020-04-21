@@ -4,23 +4,17 @@ using System.Threading.Tasks;
 namespace BaxterCommerce.Client
 {
     /// <summary>
-    /// 
+    /// Client for handling requests for user registration
     /// </summary>
     public class UserRegistrationClient : BaseHttpRequestClient<UserResource, UserResource>, IUserRegistrationClient
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="clientConfiguration"></param>
         public UserRegistrationClient(ClientConfiguration clientConfiguration) : base(clientConfiguration)
         {
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IUserRegistrationClient.FindUserById(string)"/>
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public async Task<UserResource> FindUserById(string id)
         {
             var requestUri = $"/user/{id}";
@@ -31,10 +25,8 @@ namespace BaxterCommerce.Client
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IUserRegistrationClient.RegisterNewUser(UserResource)"/>
         /// </summary>
-        /// <param name="userResource"></param>
-        /// <returns></returns>
         public async Task<UserResource> RegisterNewUser(UserResource userResource)
         {
             var requestUri = "/user";

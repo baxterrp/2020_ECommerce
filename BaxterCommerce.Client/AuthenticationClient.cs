@@ -1,11 +1,10 @@
 ﻿using BaxterCommerce.CommonClasses.Users;
-using System;
 using System.Threading.Tasks;
 
 namespace BaxterCommerce.Client
 {
     /// <summary>
-    /// 
+    /// Client for handling user authentication
     /// </summary>
     public class AuthenticationClient : BaseHttpRequestClient<LoginRequest, LoginResponse>, IAuthenticationClient
     {
@@ -14,10 +13,8 @@ namespace BaxterCommerce.Client
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IAuthenticationClient.Login(LoginRequest)"/>
         /// </summary>
-        /// <param name="loginRequest"></param>
-        /// <returns></returns>
         public async Task<LoginResponse> Login(LoginRequest loginRequest)
         {
             var requestUri = $"/user/login";
