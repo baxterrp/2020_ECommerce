@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BaxterCommerce.CommonClasses\BaxterCommerce.CommonClasses.csproj" />
+    <ProjectReference Include="..\BaxterCommerce.Data\BaxterCommerce.Data.csproj" />
   </ItemGroup>
 
 </Project>

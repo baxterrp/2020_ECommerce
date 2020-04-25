@@ -1,4 +1,6 @@
 ﻿using BaxterCommerce.CommonClasses.Users;
+using BaxterCommerce.Data.BaseExceptions;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace BaxterCommerce.Client
@@ -24,22 +26,19 @@ namespace BaxterCommerce.Client
             if (httpResponse.IsSuccessStatusCode)
             {
                 var successResponse = await ReadHttpResponse(httpResponse);
-
                 var message = successResponse.Success ? "Login Successful" : "Invalid Credentials";
-
                 successResponse.Messages.Add(message);
 
                 return successResponse;
             }
-
-            var errorResponse = new LoginResponse
+            else
             {
-                Success = false,
-            };
+                var exceptionResponse = JsonConvert.DeserializeObject<ExceptionResponse>(await httpRequest.Content.ReadAsStringAsync());
+                var errorResponse = new LoginResponse { Success = false };
+                errorResponse.Messages.Add(exceptionResponse.Message);
 
-            errorResponse.Messages.Add("An error occured making the request");
-
-            return errorResponse;
+                return errorResponse;
+            }
         }
     }
 }

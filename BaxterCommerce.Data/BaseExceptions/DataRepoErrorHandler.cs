@@ -51,7 +51,9 @@ namespace BaxterCommerce.Data.BaseExceptions
                     break;
             }
 
-            var result = JsonConvert.SerializeObject(new { error = exception.Message });
+            var exceptionResponse = new ExceptionResponse { Message = exception.Message };
+
+            var result = JsonConvert.SerializeObject(exceptionResponse);
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)code;
 

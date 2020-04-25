@@ -9,7 +9,6 @@ using BaxterCommerce.Data.Logging;
 
 namespace BaxterCommerce.Data.Base
 {
-    //TODO: handle exceptions better
     /// <summary>
     /// Base Repository class for handling data base interactions
     /// </summary>
