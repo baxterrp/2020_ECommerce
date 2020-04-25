@@ -1,4 +1,5 @@
 ﻿using BaxterCommerce.Data.Base;
+using BaxterCommerce.Data.BaseExceptions;
 using BaxterCommerce.Data.Migrations;
 using BaxterCommerce.Data.Users;
 using BaxterCommerce.Web.Services;
@@ -9,7 +10,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
 
 namespace BaxterCommerce.Web
 {
@@ -62,6 +62,8 @@ namespace BaxterCommerce.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware(typeof(DataRepoErrorHandler));
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();

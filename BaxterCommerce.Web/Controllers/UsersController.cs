@@ -31,13 +31,23 @@ namespace BaxterCommerce.Web.Controllers
         [HttpGet("/user/{id}")]
         public async Task<IActionResult> FindUserById([FromRoute] string id)
         {
-            _logger.Debug("Received request to find User by Id : {userId}", id);
+            if (string.IsNullOrWhiteSpace(id)) throw new ArgumentNullException(nameof(id));
 
-            var user = await _userService.GetUserById(id);
+            try
+            {
+                _logger.Debug("Received request to find User by Id : {userId}", id);
 
-            _logger.Debug("Found user {email} with id {id}", user.Email, user.Id);
+                var user = await _userService.GetUserById(id);
 
-            return Ok(user);
+                _logger.Debug("Found user {email} with id {id}", user.Email, user.Id);
+
+                return Ok(user);
+            }
+            catch(Exception exception)
+            {
+                _logger.Debug(exception.ToString());
+                throw;
+            }
         }
 
         /// <summary>
@@ -48,13 +58,23 @@ namespace BaxterCommerce.Web.Controllers
         [HttpPost("/user")]
         public async Task<IActionResult> CreateNewUser([FromBody] UserResource userResource)
         {
-            _logger.Debug("Creating {user}", userResource);
+            ValidateUserResource(userResource);
 
-            var user = await _userService.CreateNewUser(userResource);
+            try
+            {
+                _logger.Debug("Creating {user}", userResource);
 
-            _logger.Debug("Created user with id {userId}", user.Id);
+                var user = await _userService.CreateNewUser(userResource);
 
-            return Ok(user);
+                _logger.Debug("Created user with id {userId}", user.Id);
+
+                return Ok(user);
+            }
+            catch(Exception exception)
+            {
+                _logger.Debug(exception.ToString());
+                throw;
+            }
         }
 
         /// <summary>
@@ -65,20 +85,46 @@ namespace BaxterCommerce.Web.Controllers
         [HttpPost("/user/login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            _logger.Debug("Attempting to login user with email {email}", loginRequest.Email);
+            if (loginRequest is null) throw new ArgumentNullException(nameof(loginRequest));
+            if (string.IsNullOrWhiteSpace(loginRequest.Email)) throw new ArgumentNullException(nameof(loginRequest.Equals));
+            if (string.IsNullOrWhiteSpace(loginRequest.Password)) throw new ArgumentNullException(nameof(loginRequest.Password));
 
-            var response = await _userService.AttemptLogin(loginRequest);
-
-            if (response.Success)
+            try
             {
-                _logger.Debug("Successfully logged in user {user}", response.User);
-            }
-            else
-            {
-                _logger.Debug("Login attempted failed with email {email}, invalid credentials", loginRequest.Email);
-            }
+                _logger.Debug("Attempting to login user with email {email}", loginRequest.Email);
 
-            return Ok(response);
+                var response = await _userService.AttemptLogin(loginRequest);
+
+                if (response.Success)
+                {
+                    _logger.Debug("Successfully logged in user {user}", response.User);
+                }
+                else
+                {
+                    _logger.Debug("Login attempt failed with email {email}, invalid credentials", loginRequest.Email);
+                }
+
+                return Ok(response);
+            }
+            catch(Exception exception)
+            {
+                _logger.Debug(exception.ToString());
+                throw;
+            }
+        }
+
+        private void ValidateUserResource(UserResource userResource)
+        {
+            if (userResource is null) throw new ArgumentNullException(nameof(userResource));
+            if (string.IsNullOrWhiteSpace(userResource.Email)) throw new ArgumentNullException(nameof(userResource.Email));
+            if (string.IsNullOrWhiteSpace(userResource.FirstName)) throw new ArgumentNullException(nameof(userResource.FirstName));
+            if (string.IsNullOrWhiteSpace(userResource.LastName)) throw new ArgumentNullException(nameof(userResource.LastName));
+            if (string.IsNullOrWhiteSpace(userResource.Password)) throw new ArgumentNullException(nameof(userResource.Password));
+            if (string.IsNullOrWhiteSpace(userResource.Address)) throw new ArgumentNullException(nameof(userResource.Address));
+            if (string.IsNullOrWhiteSpace(userResource.City)) throw new ArgumentNullException(nameof(userResource.City));
+            if (string.IsNullOrWhiteSpace(userResource.State)) throw new ArgumentNullException(nameof(userResource.State));
+            if (string.IsNullOrWhiteSpace(userResource.ZipCode)) throw new ArgumentNullException(nameof(userResource.ZipCode));
+            if (string.IsNullOrWhiteSpace(userResource.PhoneNumber)) throw new ArgumentNullException(nameof(userResource.PhoneNumber));
         }
     }
 }
