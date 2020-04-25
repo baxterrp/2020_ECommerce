@@ -13,9 +13,9 @@ to run you must
     ```
 to build application
 
-in root directory
+1) in root directory
 > dotnet build BaxterCommerceWebApi.sln
 
-to run application
+2) to run application
 navigate to ~/BaxterCommerce.Web/bin/debug/netcoreapp3.1/
 > dotnet BaxterCommerce.Web.dll
