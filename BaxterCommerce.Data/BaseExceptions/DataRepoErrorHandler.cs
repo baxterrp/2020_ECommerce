@@ -51,13 +51,10 @@ namespace BaxterCommerce.Data.BaseExceptions
                     break;
             }
 
-            var exceptionResponse = new ExceptionResponse { Message = exception.Message };
-
-            var result = JsonConvert.SerializeObject(exceptionResponse);
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)code;
 
-            return httpContext.Response.WriteAsync(result);
+            return httpContext.Response.WriteAsync(exception.Message);
         }
     }
 }

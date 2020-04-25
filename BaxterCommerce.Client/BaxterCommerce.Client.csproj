@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Client package for consuming services</Description>
-    <Version>1.0.7</Version>
+    <Version>1.0.8</Version>
     <Authors>Robert Baxter</Authors>
   </PropertyGroup>
 
@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BaxterCommerce.CommonClasses\BaxterCommerce.CommonClasses.csproj" />
-    <ProjectReference Include="..\BaxterCommerce.Data\BaxterCommerce.Data.csproj" />
   </ItemGroup>
 
 </Project>

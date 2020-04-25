@@ -1,5 +1,4 @@
 ﻿using BaxterCommerce.CommonClasses.Users;
-using BaxterCommerce.Data.BaseExceptions;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
@@ -33,9 +32,9 @@ namespace BaxterCommerce.Client
             }
             else
             {
-                var exceptionResponse = JsonConvert.DeserializeObject<ExceptionResponse>(await httpRequest.Content.ReadAsStringAsync());
+                var exceptionResponse = JsonConvert.DeserializeObject(await httpRequest.Content.ReadAsStringAsync());
                 var errorResponse = new LoginResponse { Success = false };
-                errorResponse.Messages.Add(exceptionResponse.Message);
+                errorResponse.Messages.Add((string)exceptionResponse);
 
                 return errorResponse;
             }
