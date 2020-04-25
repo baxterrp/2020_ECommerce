@@ -6,8 +6,23 @@
     public class ConnectionConfiguration
     {
         /// <summary>
-        /// Connection string for database
+        /// The targeted machine name
         /// </summary>
-        public string ConnectionString { get; set; }
+        public string DataSource { get; set; }
+
+        /// <summary>
+        /// Name of database
+        /// </summary>
+        public string Catalog { get; set; }
+
+        /// <summary>
+        /// Allow integrated security
+        /// </summary>
+        public string IntegratedSecurity { get; set; }
+
+        /// <summary>
+        /// Combines components of connection string with argument names
+        /// </summary>
+        public string GetConnectionString() => $"Data Source = {DataSource}; Initial Catalog = {Catalog}; Integrated Security = {IntegratedSecurity};";
     }
 }

@@ -29,7 +29,7 @@ namespace BaxterCommerce.Data.Base
         /// </summary>
         public async Task<IEnumerable<TResource>> Find(BaseSearchParameters parameters)
         {
-            using (var connection = new SqlConnection(_connectionConfiguration.ConnectionString))
+            using (var connection = new SqlConnection(_connectionConfiguration.GetConnectionString()))
             {
                 try
                 {
@@ -49,7 +49,7 @@ namespace BaxterCommerce.Data.Base
         /// </summary>
         public async Task<TResource> FindById(string id)
         {
-            using (var connection = new SqlConnection(_connectionConfiguration.ConnectionString))
+            using (var connection = new SqlConnection(_connectionConfiguration.GetConnectionString()))
             {
                 try
                 {
@@ -69,7 +69,7 @@ namespace BaxterCommerce.Data.Base
         /// </summary>
         public virtual async Task Insert(TResource resource)
         {
-            using (var connection = new SqlConnection(_connectionConfiguration.ConnectionString))
+            using (var connection = new SqlConnection(_connectionConfiguration.GetConnectionString()))
             {
                 try
                 {
@@ -87,7 +87,7 @@ namespace BaxterCommerce.Data.Base
         /// </summary>
         public virtual async Task Update(TResource resource)
         {
-            using (var connection = new SqlConnection(_connectionConfiguration.ConnectionString))
+            using (var connection = new SqlConnection(_connectionConfiguration.GetConnectionString()))
             {
                 try
                 {

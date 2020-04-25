@@ -31,7 +31,7 @@ namespace BaxterCommerce.Web
             services.AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
-                    .WithGlobalConnectionString(config.ConnectionString)
+                    .WithGlobalConnectionString(config.GetConnectionString())
                     .ScanIn(typeof(Version041920201252).Assembly).For.Migrations());
 
             services.AddSingleton<BaseTableConfiguration>(sp => new UserTableConfiguration());
