@@ -8,7 +8,7 @@ to run you must
 4) modify ConnectionConfiguration section in appsettings.json in directory ~/BaxterCommerce.Web/
     ```
     DataSource : your sql server name
-    Catalog : name of database you intend to use - should be eComm\n
+    Catalog : name of database you intend to use - should be eComm
     IntegratedSecurity : leave as True
     ```
 to build application
