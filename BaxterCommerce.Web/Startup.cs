@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 
 namespace BaxterCommerce.Web
 {
@@ -27,7 +28,7 @@ namespace BaxterCommerce.Web
             var config = new ConnectionConfiguration();
             Configuration.GetSection("ConnectionConfiguration").Bind(config);
             services.AddSingleton(config);
-
+            
             services.AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()

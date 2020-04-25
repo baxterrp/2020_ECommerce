@@ -1,6 +1,8 @@
 ﻿using BaxterCommerce.CommonClasses.Users;
+using BaxterCommerce.Data.Logging;
 using BaxterCommerce.Web.Services;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System;
 using System.Threading.Tasks;
 
@@ -13,9 +15,11 @@ namespace BaxterCommerce.Web.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly ILogger _logger;
 
         public UsersController(IUserService userService)
         {
+            _logger = LoggerFactory.CreateLogger();
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));
         }
 
@@ -27,7 +31,13 @@ namespace BaxterCommerce.Web.Controllers
         [HttpGet("/user/{id}")]
         public async Task<IActionResult> FindUserById([FromRoute] string id)
         {
-            return Ok(await _userService.GetUserById(id));
+            _logger.Debug("Received request to find User by Id : {userId}", id);
+
+            var user = await _userService.GetUserById(id);
+
+            _logger.Debug("Found user {email} with id {id}", user.Email, user.Id);
+
+            return Ok(user);
         }
 
         /// <summary>
@@ -38,7 +48,13 @@ namespace BaxterCommerce.Web.Controllers
         [HttpPost("/user")]
         public async Task<IActionResult> CreateNewUser([FromBody] UserResource userResource)
         {
-            return Ok(await _userService.CreateNewUser(userResource));
+            _logger.Debug("Creating {user}", userResource);
+
+            var user = await _userService.CreateNewUser(userResource);
+
+            _logger.Debug("Created user with id {userId}", user.Id);
+
+            return Ok(user);
         }
 
         /// <summary>
@@ -49,7 +65,18 @@ namespace BaxterCommerce.Web.Controllers
         [HttpPost("/user/login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
+            _logger.Debug("Attempting to login user with email {email}", loginRequest.Email);
+
             var response = await _userService.AttemptLogin(loginRequest);
+
+            if (response.Success)
+            {
+                _logger.Debug("Successfully logged in user {user}", response.User);
+            }
+            else
+            {
+                _logger.Debug("Login attempted failed with email {email}, invalid credentials", loginRequest.Email);
+            }
 
             return Ok(response);
         }

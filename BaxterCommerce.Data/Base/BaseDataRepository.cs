@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Serilog;
+using BaxterCommerce.Data.Logging;
 
 namespace BaxterCommerce.Data.Base
 {
@@ -17,13 +19,14 @@ namespace BaxterCommerce.Data.Base
     {
         private readonly ConnectionConfiguration _connectionConfiguration;
         private readonly BaseTableConfiguration _tableConfiguration;
+        private readonly ILogger _logger;
 
         protected BaseDataRepository(ConnectionConfiguration connectionConfiguration, BaseTableConfiguration tableConfiguration)
         {
             _connectionConfiguration = connectionConfiguration ?? throw new ArgumentNullException(nameof(connectionConfiguration));
             _tableConfiguration = tableConfiguration ?? throw new ArgumentNullException(nameof(tableConfiguration));
+            _logger = LoggerFactory.CreateLogger();
         }
-
         /// <summary>
         /// Implements <see cref="IDataRepository{TResource}.Find(BaseSearchParameters)"/>
         /// </summary>
@@ -53,7 +56,11 @@ namespace BaxterCommerce.Data.Base
             {
                 try
                 {
-                    var result = await connection.QuerySingleAsync<TResource>(_tableConfiguration.Find, new { Id = id });
+                    _logger.Debug("Finding resource {type} by id {resourceId}", typeof(TResource), id);
+
+                    var result = await connection.QuerySingleAsync<TResource>(_tableConfiguration.FindById, new { Id = id });
+
+                    _logger.Debug("Found resource {resource}", result.ToString());
 
                     return result;
                 }
@@ -73,6 +80,7 @@ namespace BaxterCommerce.Data.Base
             {
                 try
                 {
+                    _logger.Debug("Creating new resource {type} {resource}", typeof(TResource), resource.ToString());
                     await connection.ExecuteAsync(_tableConfiguration.Insert, resource);
                 }
                 catch

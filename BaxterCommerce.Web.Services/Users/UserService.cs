@@ -1,5 +1,7 @@
 ﻿using BaxterCommerce.CommonClasses.Users;
+using BaxterCommerce.Data.Logging;
 using BaxterCommerce.Data.Users;
+using Serilog;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,11 +15,13 @@ namespace BaxterCommerce.Web.Services.Users
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHashing _passwordHashing;
+        private readonly ILogger _logger;
         
         public UserService(IUserRepository userRepository, IPasswordHashing passwordHashing)
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
             _passwordHashing = passwordHashing ?? throw new ArgumentNullException(nameof(passwordHashing));
+            _logger = LoggerFactory.CreateLogger();
         }
 
         /// <summary>
@@ -25,17 +29,26 @@ namespace BaxterCommerce.Web.Services.Users
         /// </summary>
         public async Task<LoginResponse> AttemptLogin(LoginRequest loginRequest)
         {
+            _logger.Debug("Attempted to find user with email {email", loginRequest.Email);
+            
             var userFromEmail = (await _userRepository.Find(new UserSearchParameters { Email = loginRequest.Email })).Single();
+
+            _logger.Debug("Found user {user}", userFromEmail);
+
+            _logger.Debug("Verifying user password for {email}", userFromEmail.Email);
             var isValidPassword = _passwordHashing.VerifyPassword(loginRequest.Password, userFromEmail.Password);
+
             var loginResponse = new LoginResponse();
 
             if (isValidPassword)
             {
+                _logger.Debug("Successfully logged in user with email {email}", userFromEmail.Email);
                 loginResponse.Success = true;
                 loginResponse.User = userFromEmail;
             }
             else
             {
+                _logger.Debug("Login attempt failed for user {email}", userFromEmail.Email);
                 loginResponse.Success = false;
             }
 
@@ -47,12 +60,16 @@ namespace BaxterCommerce.Web.Services.Users
         /// </summary>
         public async Task<UserResource> CreateNewUser(UserResource userResource)
         {
+            _logger.Debug("Creating user {user}", userResource);
             userResource.Id = Guid.NewGuid().ToString();
             userResource.CreatedAt = DateTime.Now;
             userResource.UpdatedAt = DateTime.Now;
 
+            _logger.Debug("Generated id {userId} at {createdAt} for user {user}", userResource.Id, userResource.CreatedAt, userResource);
+
             userResource.IsAdmin = userResource.IsAdmin > 0 ? 1 : 0;
 
+            _logger.Debug("Hashing password for user {email}", userResource.Email);
             userResource.Password = _passwordHashing.HashPassword(userResource.Password);
 
             await _userRepository.Insert(userResource);

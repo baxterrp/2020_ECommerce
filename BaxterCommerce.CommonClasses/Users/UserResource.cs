@@ -1,4 +1,6 @@
-﻿namespace BaxterCommerce.CommonClasses.Users
+﻿using System.Text;
+
+namespace BaxterCommerce.CommonClasses.Users
 {
     /// <summary>
     /// Inherets <see cref="BaseResource"/> represents a single user
@@ -54,5 +56,21 @@
         /// Signifies if the user has administrative privilege 
         /// </summary>
         public int IsAdmin { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append($"[{nameof(UserResource)}]");
+            stringBuilder.Append($"{nameof(FirstName)}: {FirstName},");
+            stringBuilder.Append($"{nameof(LastName)}: {LastName},");
+            stringBuilder.Append($"{nameof(Email)}: {Email},");
+            stringBuilder.Append($"{nameof(Address)}: {Address},");
+            stringBuilder.Append($"{nameof(City)}: {City},");
+            stringBuilder.Append($"{nameof(State)}: {State},");
+            stringBuilder.Append($"{nameof(ZipCode)}: {ZipCode},");
+            stringBuilder.Append($"{nameof(PhoneNumber)}: {PhoneNumber}");
+
+            return stringBuilder.ToString();
+        }
     }
 }
