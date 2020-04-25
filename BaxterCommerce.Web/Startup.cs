@@ -1,6 +1,7 @@
 ﻿using BaxterCommerce.Data.Base;
 using BaxterCommerce.Data.BaseExceptions;
 using BaxterCommerce.Data.Migrations;
+using BaxterCommerce.Data.Migrations.Versions;
 using BaxterCommerce.Data.Users;
 using BaxterCommerce.Web.Services;
 using BaxterCommerce.Web.Services.Users;
@@ -33,7 +34,8 @@ namespace BaxterCommerce.Web
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
                     .WithGlobalConnectionString(config.GetConnectionString())
-                    .ScanIn(typeof(Version041920201252).Assembly).For.Migrations());
+                    .ScanIn(typeof(Version041920201252).Assembly).For.Migrations()
+                    .ScanIn(typeof(Version042520201943).Assembly).For.Migrations());
 
             services.AddSingleton<BaseTableConfiguration>(sp => new UserTableConfiguration());
             services.AddSingleton<IPasswordHashing, PasswordHashing>();

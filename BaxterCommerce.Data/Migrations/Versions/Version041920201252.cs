@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace BaxterCommerce.Data.Migrations
+namespace BaxterCommerce.Data.Migrations.Versions
 {
     /// <summary>
     /// Construct Users table
