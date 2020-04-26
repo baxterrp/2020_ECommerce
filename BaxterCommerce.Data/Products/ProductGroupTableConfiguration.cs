@@ -20,11 +20,6 @@ namespace BaxterCommerce.Data.Products
         public override string Find { get; set; }
 
         /// <summary>
-        /// override of <see cref="BaseTableConfiguration.FindById"/>
-        /// </summary>
-        public override string FindById { get; set; }
-
-        /// <summary>
         /// override of <see cref="BaseTableConfiguration.Insert"/>
         /// </summary>
         public override string Insert { get; set; }

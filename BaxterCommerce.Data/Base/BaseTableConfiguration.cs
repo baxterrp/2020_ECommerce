@@ -14,6 +14,7 @@ namespace BaxterCommerce.Data.Base
             if(string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
 
             Name = name;
+            FindById = $"SELECT * FROM {Name} WHERE [Id] = @Id";
         }
 
         /// <summary>
@@ -29,8 +30,7 @@ namespace BaxterCommerce.Data.Base
         /// <summary>
         /// Search query based on primary identifier
         /// </summary>
-        public abstract string FindById { get; set; }
-
+        public virtual string FindById { get; set; }
         /// <summary>
         /// Insert statement 
         /// </summary>
