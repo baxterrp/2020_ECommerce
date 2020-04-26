@@ -43,7 +43,7 @@ namespace BaxterCommerce.Data.BaseExceptions
             {
                 case ArgumentNullException _:
                 case ArgumentException _:
-                case DuplicateUserException _:
+                case DuplicateResourceException _:
                     code = HttpStatusCode.BadRequest; 
                     break;
                 default:

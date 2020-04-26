@@ -2,8 +2,10 @@
 using BaxterCommerce.Data.BaseExceptions;
 using BaxterCommerce.Data.Migrations;
 using BaxterCommerce.Data.Migrations.Versions;
+using BaxterCommerce.Data.Products;
 using BaxterCommerce.Data.Users;
 using BaxterCommerce.Web.Services;
+using BaxterCommerce.Web.Services.Products;
 using BaxterCommerce.Web.Services.Users;
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
@@ -37,10 +39,13 @@ namespace BaxterCommerce.Web
                     .ScanIn(typeof(Version041920201252).Assembly).For.Migrations()
                     .ScanIn(typeof(Version042520201943).Assembly).For.Migrations());
 
-            services.AddSingleton<BaseTableConfiguration>(sp => new UserTableConfiguration());
+            services.AddSingleton<IProductGroupService, ProductGroupService>();
+            services.AddSingleton<IProductGroupRepository, ProductGroupRepository>(sp =>
+                new ProductGroupRepository(sp.GetRequiredService<ConnectionConfiguration>(), new ProductGroupTableConfiguration()));
             services.AddSingleton<IPasswordHashing, PasswordHashing>();
             services.AddSingleton<IUserService, UserService>();
-            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IUserRepository, UserRepository>(sp =>
+                new UserRepository(sp.GetRequiredService<ConnectionConfiguration>(), new UserTableConfiguration()));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }

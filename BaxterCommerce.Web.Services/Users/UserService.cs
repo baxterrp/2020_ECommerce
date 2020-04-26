@@ -111,7 +111,7 @@ namespace BaxterCommerce.Web.Services.Users
             if (potentionalUsers.Any())
             {
                 _logger.Debug("Cannot create new user with email {email}, a user with that email already exists", userResource.Email);
-                throw new DuplicateUserException($"User with email {userResource.Email} already exists");
+                throw new DuplicateResourceException($"User with email {userResource.Email} already exists");
             }
         }
 

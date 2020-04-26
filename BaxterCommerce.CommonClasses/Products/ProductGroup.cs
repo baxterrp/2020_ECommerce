@@ -1,6 +1,4 @@
-﻿using BaxterCommerce.CommonClasses;
-
-namespace BaxterCommerce.Data.Products
+﻿namespace BaxterCommerce.CommonClasses.Products
 {
     /// <summary>
     /// Category for grouping <see cref="Product"/> together
