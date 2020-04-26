@@ -12,28 +12,18 @@ namespace BaxterCommerce.Client
         {
         }
 
+        private static readonly string _baseUserURI = "/user";
+
         /// <summary>
         /// Implements <see cref="IUserRegistrationClient.FindUserById(string)"/>
         /// </summary>
-        public async Task<UserResource> FindUserById(string id)
-        {
-            var requestUri = $"/user/{id}";
-            var httpRequest = BuildGetRequest(requestUri);
-            var httpResponse = await SendRequest(httpRequest);
-
-            return await ReadHttpResponse(httpResponse);
-        }
+        public async Task<UserResource> FindUserById(string id) =>
+             await SendGetRequest($"{_baseUserURI}/{id}");
 
         /// <summary>
         /// Implements <see cref="IUserRegistrationClient.RegisterNewUser(UserResource)"/>
         /// </summary>
-        public async Task<UserResource> RegisterNewUser(UserResource userResource)
-        {
-            var requestUri = "/user";
-            var httpRequest = BuildPostRequest(requestUri, userResource);
-            var httpResponse = await SendRequest(httpRequest);
-
-            return await ReadHttpResponse(httpResponse);
-        }
+        public async Task<UserResource> RegisterNewUser(UserResource userResource) =>
+            await SendPostRequest(_baseUserURI, userResource);
     }
 }

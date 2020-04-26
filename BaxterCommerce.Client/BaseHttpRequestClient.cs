@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BaxterCommerce.CommonClasses;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Text;
@@ -27,51 +28,58 @@ namespace BaxterCommerce.Client
         {
             using (var client = new HttpClient())
             {
-                try
-                {
-                    var result = await client.SendAsync(httpRequestMessage);
-
-                    return result;
-                }
-                catch
-                {
-                    throw;
-                }
+                return await client.SendAsync(httpRequestMessage);
             }
         }
 
         /// <summary>
-        /// Constructs the <see cref="HttpRequestMessage"/> using provided <see cref="ClientConfiguration"/> and URI
+        /// Constructs and sends the <see cref="HttpRequestMessage"/> using provided URI
         /// </summary>
         /// <param name="uri">the URI of the request</param>
-        /// <returns><see cref="HttpRequestMessage"/></returns>
-        protected HttpRequestMessage BuildGetRequest(string uri) => new HttpRequestMessage(HttpMethod.Get, _clientConfiguration.BaseAddress + uri);
-
-        /// <summary>
-        /// Constructs the <see cref="HttpRequestMessage"/>
-        /// </summary>
-        /// <param name="uri">the URI of the request</param>
-        /// <param name="resource">The <see cref="TResource"/> to add to the request</param>
-        /// <returns><see cref="HttpRequestMessage"/></returns>
-        protected HttpRequestMessage BuildPostRequest(string uri, TResource resource)
+        /// <returns><see cref="TResponseObject"/></returns>
+        protected async Task<TResponseObject> SendGetRequest(string uri)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, _clientConfiguration.BaseAddress + uri);
-            request.Content = new StringContent(JsonConvert.SerializeObject(resource), Encoding.UTF8, _clientConfiguration.MediaType);
+            var getRequest = new HttpRequestMessage(HttpMethod.Get, _clientConfiguration.BaseAddress + uri);
+            var httpResponse = await SendRequest(getRequest);
+            var responseObject = await ReadHttpResponse(httpResponse);
 
-            return request;
+            return responseObject;
         }
 
         /// <summary>
-        /// Reads the <see cref="HttpResponseMessage"/> from the request and converts to <see cref="TResponseObject"/>
+        /// Constructs and sends the <see cref="HttpRequestMessage"/>
         /// </summary>
-        /// <param name="httpResponse"><see cref="HttpResponseMessage"/></param>
+        /// <param name="uri">the URI of the request</param>
+        /// <param name="resource">The <see cref="TResource"/> to add to the request</param>
         /// <returns><see cref="TResponseObject"/></returns>
-        protected async Task<TResponseObject> ReadHttpResponse(HttpResponseMessage httpResponse)
+        protected async Task<TResponseObject> SendPostRequest(string uri, TResource resource)
         {
-            var stringifiedResult = await httpResponse.Content.ReadAsStringAsync();
-            var deserializedResult = JsonConvert.DeserializeObject<TResponseObject>(stringifiedResult);
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, _clientConfiguration.BaseAddress + uri);
+            postRequest.Content = new StringContent(JsonConvert.SerializeObject(resource), Encoding.UTF8, _clientConfiguration.MediaType);
+            var httpResponse = await SendRequest(postRequest);
+            var responseObject = await ReadHttpResponse(httpResponse);
 
-            return deserializedResult;
+            return responseObject;
+        }
+        
+        private async Task<TResponseObject> ReadHttpResponse(HttpResponseMessage httpResponse)
+        {
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                var stringifiedResult = await httpResponse.Content.ReadAsStringAsync();
+                var deserializedResult = JsonConvert.DeserializeObject<TResponseObject>(stringifiedResult);
+
+                return deserializedResult;
+            }
+
+            throw await ReadApiException(httpResponse);
+        }
+
+        private async Task<ApiException> ReadApiException(HttpResponseMessage httpResponse)
+        {
+            var exception = JsonConvert.DeserializeObject<ApiException>(await httpResponse.Content.ReadAsStringAsync());
+
+            return exception;
         }
     }
 }

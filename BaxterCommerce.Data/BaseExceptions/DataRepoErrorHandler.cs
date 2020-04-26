@@ -1,4 +1,5 @@
-﻿using BaxterCommerce.Data.Users.Exceptions;
+﻿using BaxterCommerce.CommonClasses;
+using BaxterCommerce.Data.Users.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -54,7 +55,9 @@ namespace BaxterCommerce.Data.BaseExceptions
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)code;
 
-            return httpContext.Response.WriteAsync(exception.Message);
+            var stringifiedApiException = JsonConvert.SerializeObject(new ApiException(exception.Message));
+
+            return httpContext.Response.WriteAsync(stringifiedApiException);
         }
     }
 }
