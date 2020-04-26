@@ -27,9 +27,14 @@ namespace BaxterCommerce.Web.Services.Products
         /// </summary>
         public async Task<ProductGroup> AddProductGroup(ProductGroup productGroup)
         {
+            if (productGroup is null) throw new ArgumentNullException(nameof(productGroup));
+            if (string.IsNullOrWhiteSpace(productGroup.Name)) throw new ArgumentNullException(nameof(productGroup.Name));
+
             productGroup.Id = Guid.NewGuid().ToString();
             productGroup.CreatedAt = DateTime.Now;
             productGroup.UpdatedAt = DateTime.Now;
+
+            _logger.Debug("Generated id {id} for product {name}", productGroup.Id, productGroup.Name);
 
             await _productGroupRepository.Insert(productGroup);
 
@@ -41,6 +46,7 @@ namespace BaxterCommerce.Web.Services.Products
         /// </summary>
         public async Task<IEnumerable<ProductGroup>> GetAllProductGroups()
         {
+            _logger.Debug("Looking up all product groups");
             return await _productGroupRepository.Find(new ProductGroupSearchParameters());
         }
     }
