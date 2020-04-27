@@ -1,7 +1,7 @@
 ﻿using BaxterCommerce.CommonClasses.Users;
 using System.Threading.Tasks;
 
-namespace BaxterCommerce.Client
+namespace BaxterCommerce.Client.Users
 {
     /// <summary>
     /// Client for handling requests for user registration

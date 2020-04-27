@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Client package for consuming services</Description>
-    <Version>1.0.9</Version>
+    <Version>1.0.10</Version>
     <Authors>Robert Baxter</Authors>
   </PropertyGroup>
 

@@ -1,4 +1,5 @@
-﻿using BaxterCommerce.CommonClasses.Users;
+﻿using BaxterCommerce.Client.Users;
+using BaxterCommerce.CommonClasses.Users;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
