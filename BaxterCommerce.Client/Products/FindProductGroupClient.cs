@@ -7,7 +7,7 @@ namespace BaxterCommerce.Client.Products
     /// <summary>
     /// Implements <see cref="IFindProductGroupClient"/>
     /// </summary>
-    public class FindProductGroupClient : BaseHttpRequestClient<ProductGroup, IEnumerable<ProductGroup>>
+    public class FindProductGroupClient : BaseHttpRequestClient<ProductGroup, IEnumerable<ProductGroup>>, IFindProductGroupClient
     {
         private static readonly string _baseProductGroupURI = "/groups";
 
