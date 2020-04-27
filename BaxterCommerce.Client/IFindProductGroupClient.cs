@@ -4,7 +4,10 @@ using System.Threading.Tasks;
 
 namespace BaxterCommerce.Client
 {
-    interface IFindProductGroupClient
+    /// <summary>
+    /// For performing Get requests on <see cref="ProductGroup"/>
+    /// </summary>
+    public interface IFindProductGroupClient
     {
         /// <summary>
         /// Gets all <see cref="ProductGroup"/>
