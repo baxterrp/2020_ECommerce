@@ -21,8 +21,18 @@
         public string IntegratedSecurity { get; set; }
 
         /// <summary>
+        /// Username of db
+        /// </summary>
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// Password to db
+        /// </summary>
+        public string Password { get; set; }
+
+        /// <summary>
         /// Combines components of connection string with argument names
         /// </summary>
-        public string GetConnectionString() => $"Data Source = {DataSource}; Initial Catalog = {Catalog}; Integrated Security = {IntegratedSecurity};";
+        public string GetConnectionString() => $"Server={DataSource};Initial Catalog={Catalog};Persist Security Info=False;User ID={UserName};Password={Password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
     }
 }
